@@ -1,0 +1,28 @@
+#!/bin/bash
+echo 'this script to use openvpn'
+echo "do you want to connect openvpn "
+read q
+if [ $q == 'yes' ]
+then
+sudo warp-cli connect
+echo 'connect has done'
+else 
+echo "do you want to open vpn "
+echo 'put path'
+fi
+
+sudo openvpn /home/kali/Mrx..ovpn&
+echo '--------------------------------------------------'
+echo "your ip is : "
+ip a |grep 'scope global' |grep -e 'tun' |cut -d ' ' -f6
+echo '--------------------------------------------------'
+sleep 7
+echo "this for chech your connection status"
+ping -c 3 10.10.10.10
+
+echo "Are you want to disconnect put yes  "
+read status
+if [ $status == 'yes' ] 
+then
+sudo warp-cli disconnect
+fi
